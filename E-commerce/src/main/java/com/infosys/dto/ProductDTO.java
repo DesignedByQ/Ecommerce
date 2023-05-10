@@ -1,41 +1,30 @@
-package com.infosys.entity;
+package com.infosys.dto;
 
 import java.util.Arrays;
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
+import com.infosys.entity.Tags;
+
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name="product")
-
-public class Product {
+public class ProductDTO {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)//using identity starts from 1 and auto increments
-	private Integer pk;
+	private int pk;
 	private String sku;
 	private String name;
-	@ManyToMany
 	private List<Tags> tags;
 	private String description;
 	private boolean hasSizes;
-	private Integer inventoryCount;
+	private int inventoryCount;
 	private double retailPrice;
 	private byte[] image;
 	private String imageUrl;
 	private float rating;
 	
-	public Integer getPk() {
+	public int getPk() {
 		return pk;
 	}
-	public void setPk(Integer pk) {
+	public void setPk(int pk) {
 		this.pk = pk;
 	}
 	public String getSku() {
@@ -55,7 +44,7 @@ public class Product {
 	}
 	public void setTags(List<Tags> tags) {
 		this.tags = tags;
-	}	
+	}
 	public String getDescription() {
 		return description;
 	}
@@ -71,7 +60,7 @@ public class Product {
 	public int getInventoryCount() {
 		return inventoryCount;
 	}
-	public void setInventoryCount(Integer inventoryCount) {
+	public void setInventoryCount(int inventoryCount) {
 		this.inventoryCount = inventoryCount;
 	}
 	public double getRetailPrice() {
@@ -101,10 +90,10 @@ public class Product {
 	
 	@Override
 	public String toString() {
-		return "Product [pk=" + pk + ", sku=" + sku + ", name=" + name + ", tags=" + tags + ", description="
+		return "ProductDTO [pk=" + pk + ", sku=" + sku + ", name=" + name + ", tags=" + tags + ", description="
 				+ description + ", hasSizes=" + hasSizes + ", inventoryCount=" + inventoryCount + ", retailPrice="
 				+ retailPrice + ", image=" + Arrays.toString(image) + ", imageUrl=" + imageUrl + ", rating=" + rating
 				+ "]";
 	}
-
+	
 }
