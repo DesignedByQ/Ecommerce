@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +42,13 @@ public class ControllerAPI {
 		
 	}
 	
+	@GetMapping(value = "/getproduct/{pk}", consumes = {MediaType.ALL_VALUE}, produces = {"application/json", "application/xml"})
+	public ResponseEntity<ProductDTO> getProduct(@Valid @PathVariable("pk") Integer pk){
+		
+		return ResponseEntity.status(HttpStatus.OK).body(serviceDAOImpl.getProductService(pk));
+		
+	}
+	
 	@PostMapping(value = "/addtag", consumes = {MediaType.ALL_VALUE})
 	public ResponseEntity<TagsDTO> addTag(@Valid @RequestBody TagsDTO tagDTO){
 		
@@ -51,6 +59,12 @@ public class ControllerAPI {
 	public ResponseEntity<List<TagsDTO>> getTags(){
 		
 		return ResponseEntity.status(HttpStatus.OK).body(serviceDAOImpl.getTagsService());
+	}
+	
+	@DeleteMapping(value = "/deleteproduct/{pk}", consumes = {MediaType.ALL_VALUE})
+	public ResponseEntity<String> deletePlayer(@Valid @PathVariable("pk") Integer pk){
+		
+		return ResponseEntity.status(HttpStatus.OK).body(serviceDAOImpl.deleteProductService(pk));
 	}
 
 }

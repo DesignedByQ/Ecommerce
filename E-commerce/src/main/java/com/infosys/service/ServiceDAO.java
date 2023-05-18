@@ -10,6 +10,10 @@ public interface ServiceDAO {
 	
 	List<ProductDTO> getProductsService();
 	
+	ProductDTO getProductService(Integer pk);
+	
+	String deleteProductService(Integer pk);
+	
 	ProductDTO addProductService(ProductDTO productDTO);
 
 	TagsDTO addTagService(TagsDTO tagsDTO);

@@ -2,6 +2,7 @@ package com.infosys.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import com.infosys.repo.ProductRepo;
 import com.infosys.repo.TagsRepo;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 @Service(value="ServiceDAO")
 @Transactional
@@ -28,6 +30,8 @@ public class ServiceDAOImpl implements ServiceDAO {
 	
 	@Autowired
 	private ModelMapper modelMapper;
+	
+	
 	
 	@Override
 	public List<ProductDTO> getProductsService() {
@@ -77,6 +81,38 @@ public class ServiceDAOImpl implements ServiceDAO {
 		Tags t = tagsRepo.saveAndFlush(modelMapper.map(tagsDTO, Tags.class));
 		
 		return modelMapper.map(t, TagsDTO.class);
+	}
+
+	@Override
+	public ProductDTO getProductService(Integer pk) {
+
+		Optional<Product> p = productRepo.findById(pk);
+	
+		ProductDTO pdto = null;
+		
+		if(p.isPresent()) {
+			
+			Product prd = p.get();
+			
+			pdto = modelMapper.map(prd, ProductDTO.class);
+			
+		}
+		
+		return pdto;
+	}
+
+	public String deleteProductService(Integer pk) {
+		
+		try {
+			productRepo.deleteById(pk);
+			return "Product with ID " + pk + " was deleted!";
+		} catch(Exception e) {
+			return "Error: " + e;
+		}
+	
+//		productRepo.deleteById(pk);
+//		return "Product with ID " + pk + " was deleted!";
+		
 	}
 
 }
