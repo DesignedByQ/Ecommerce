@@ -1,110 +1,86 @@
 package com.infosys.entity;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="product")
-
 public class Product {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)//using identity starts from 1 and auto increments
 	private Integer pk;
-	private String sku;
-	private String name;
-	@ManyToMany
+	private String model;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fields_pk")
+	private Fields fields;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "product_tag",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
 	private List<Tags> tags;
-	private String description;
-	private boolean hasSizes;
-	private Integer inventoryCount;
-	private double retailPrice;
-	private byte[] image;
-	private String imageUrl;
-	private float rating;
-	
+    
+	public Product() {
+		super();
+	}
+
+	public Product(Integer pk, String model, Fields fields, List<Tags> tags) {
+		super();
+		this.pk = pk;
+		this.model = model;
+		this.fields = fields;
+		this.tags = tags;
+	}
+
 	public Integer getPk() {
 		return pk;
 	}
+
 	public void setPk(Integer pk) {
 		this.pk = pk;
 	}
-	public String getSku() {
-		return sku;
+
+	public String getModel() {
+		return model;
 	}
-	public void setSku(String sku) {
-		this.sku = sku;
+
+	public void setModel(String model) {
+		this.model = model;
 	}
-	public String getName() {
-		return name;
+
+	public Fields getFields() {
+		return fields;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setFields(Fields fields) {
+		this.fields = fields;
 	}
+
 	public List<Tags> getTags() {
 		return tags;
 	}
+
 	public void setTags(List<Tags> tags) {
 		this.tags = tags;
-	}	
-	public String getDescription() {
-		return description;
 	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public boolean isHasSizes() {
-		return hasSizes;
-	}
-	public void setHasSizes(boolean hasSizes) {
-		this.hasSizes = hasSizes;
-	}
-	public int getInventoryCount() {
-		return inventoryCount;
-	}
-	public void setInventoryCount(Integer inventoryCount) {
-		this.inventoryCount = inventoryCount;
-	}
-	public double getRetailPrice() {
-		return retailPrice;
-	}
-	public void setRetailPrice(double retailPrice) {
-		this.retailPrice = retailPrice;
-	}
-	public byte[] getImage() {
-		return image;
-	}
-	public void setImage(byte[] image) {
-		this.image = image;
-	}
-	public String getImageUrl() {
-		return imageUrl;
-	}
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
-	public float getRating() {
-		return rating;
-	}
-	public void setRating(float rating) {
-		this.rating = rating;
-	}
-	
+
 	@Override
 	public String toString() {
-		return "Product [pk=" + pk + ", sku=" + sku + ", name=" + name + ", tags=" + tags + ", description="
-				+ description + ", hasSizes=" + hasSizes + ", inventoryCount=" + inventoryCount + ", retailPrice="
-				+ retailPrice + ", image=" + Arrays.toString(image) + ", imageUrl=" + imageUrl + ", rating=" + rating
-				+ "]";
-	}
+		return "Product [pk=" + pk + ", model=" + model + ", fields=" + fields + ", tags=" + tags + "]";
+	} 
 
 }

@@ -4,14 +4,18 @@ import java.util.List;
 import java.util.Map;
 
 import com.infosys.dto.ProductDTO;
+import com.infosys.dto.TagsDTO;
 
 public interface ServiceDAO {
 	
-	List<ProductDTO> getProductService();
+	List<ProductDTO> getProductsService();
 	
-//	PlayerDTO addPlayerService(PlayerDTO playerDTO);
-//	
-//	List<PlayerDTO> getPlayerService();
+	ProductDTO addProductService(ProductDTO productDTO);
+
+	TagsDTO addTagService(TagsDTO tagsDTO);
+	
+	List<TagsDTO> getTagsService();
+
 //	
 //	TeamDTO addTeamService(TeamDTO teamDTO);
 //	

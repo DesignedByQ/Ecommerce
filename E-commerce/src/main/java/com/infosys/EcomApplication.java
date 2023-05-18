@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("com.infosys.repo.ProductRepo")
+//@ComponentScan("com.infosys.repo.ProductRepo")
 public class EcomApplication {
 
 	public static void main(String[] args) {

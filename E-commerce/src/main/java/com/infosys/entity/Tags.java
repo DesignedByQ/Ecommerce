@@ -1,7 +1,10 @@
 package com.infosys.entity;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,11 +20,23 @@ public class Tags {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer pk;
 	private String name;
-	private String friendlyName;
-	@ManyToMany
+	private String friendly_name;
+	@ManyToMany(mappedBy = "tags", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Product> product;
 	
-	public int getPk() {
+	public Tags() {
+		super();
+	}
+	
+	public Tags(Integer pk, String name, String friendly_name, List<Product> product) {
+		super();
+		this.pk = pk;
+		this.name = name;
+		this.friendly_name = friendly_name;
+		this.product = product;
+	}
+	
+	public Integer getPk() {
 		return pk;
 	}
 	public void setPk(Integer pk) {
@@ -33,11 +48,11 @@ public class Tags {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getFriendlyName() {
-		return friendlyName;
+	public String getFriendly_name() {
+		return friendly_name;
 	}
-	public void setFriendlyName(String friendlyName) {
-		this.friendlyName = friendlyName;
+	public void setFriendly_name(String friendly_name) {
+		this.friendly_name = friendly_name;
 	}
 	public List<Product> getProduct() {
 		return product;
@@ -48,7 +63,7 @@ public class Tags {
 	
 	@Override
 	public String toString() {
-		return "Tags [pk=" + pk + ", name=" + name + ", friendlyName=" + friendlyName + ", product=" + product + "]";
+		return "Tags [pk=" + pk + ", name=" + name + ", friendly_name=" + friendly_name + ", product=" + product + "]";
 	}
 
 }

@@ -3,97 +3,62 @@ package com.infosys.dto;
 import java.util.Arrays;
 import java.util.List;
 
-import com.infosys.entity.Tags;
-
 import jakarta.persistence.ManyToMany;
 
 public class ProductDTO {
 	
-	private int pk;
-	private String sku;
-	private String name;
-	private List<Tags> tags;
-	private String description;
-	private boolean hasSizes;
-	private int inventoryCount;
-	private double retailPrice;
-	private byte[] image;
-	private String imageUrl;
-	private float rating;
-	
-	public int getPk() {
-		return pk;
+	private Integer pk;
+    private String model;
+    private Fields fields;
+    private List<TagsDTO> tags;
+    
+	public ProductDTO() {
+		super();
 	}
-	public void setPk(int pk) {
+
+	public ProductDTO(Integer pk, String model, Fields fields, List<TagsDTO> tags) {
+		super();
 		this.pk = pk;
-	}
-	public String getSku() {
-		return sku;
-	}
-	public void setSku(String sku) {
-		this.sku = sku;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public List<Tags> getTags() {
-		return tags;
-	}
-	public void setTags(List<Tags> tags) {
+		this.model = model;
+		this.fields = fields;
 		this.tags = tags;
 	}
-	public String getDescription() {
-		return description;
+
+	public Integer getPk() {
+		return pk;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+
+	public void setPk(Integer pk) {
+		this.pk = pk;
 	}
-	public boolean isHasSizes() {
-		return hasSizes;
+
+	public String getModel() {
+		return model;
 	}
-	public void setHasSizes(boolean hasSizes) {
-		this.hasSizes = hasSizes;
+
+	public void setModel(String model) {
+		this.model = model;
 	}
-	public int getInventoryCount() {
-		return inventoryCount;
+
+	public Fields getFields() {
+		return fields;
 	}
-	public void setInventoryCount(int inventoryCount) {
-		this.inventoryCount = inventoryCount;
+
+	public void setFields(Fields fields) {
+		this.fields = fields;
 	}
-	public double getRetailPrice() {
-		return retailPrice;
+
+	public List<TagsDTO> getTags() {
+		return tags;
 	}
-	public void setRetailPrice(double retailPrice) {
-		this.retailPrice = retailPrice;
+
+	public void setTags(List<TagsDTO> tags) {
+		this.tags = tags;
 	}
-	public byte[] getImage() {
-		return image;
-	}
-	public void setImage(byte[] image) {
-		this.image = image;
-	}
-	public String getImageUrl() {
-		return imageUrl;
-	}
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
-	public float getRating() {
-		return rating;
-	}
-	public void setRating(float rating) {
-		this.rating = rating;
-	}
-	
+
 	@Override
 	public String toString() {
-		return "ProductDTO [pk=" + pk + ", sku=" + sku + ", name=" + name + ", tags=" + tags + ", description="
-				+ description + ", hasSizes=" + hasSizes + ", inventoryCount=" + inventoryCount + ", retailPrice="
-				+ retailPrice + ", image=" + Arrays.toString(image) + ", imageUrl=" + imageUrl + ", rating=" + rating
-				+ "]";
+		return "ProductDTO [pk=" + pk + ", model=" + model + ", fields=" + fields + ", tags=" + tags + "]";
 	}
-	
+      
 }
